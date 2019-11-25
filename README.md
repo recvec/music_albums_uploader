@@ -11,16 +11,18 @@ This utility helps you to create private channels for every music album in a fol
 Input:
 1) Path to the artist folder 
 
-![Screenshot with a base folder with music albums inside](https://i.ibb.co/d5mPrY4/Deepin-20191124103918.png "Screenshot with base folder with music albums inside")
-![Music inside](https://i.ibb.co/G3dbKZp/Deepin-20191124103941.png "Music inside")
+<img src="https://i.ibb.co/d5mPrY4/Deepin-20191124103918.png" alt="Screenshot with a base folder with music albums inside" height="200"/>
+<img src="https://i.ibb.co/G3dbKZp/Deepin-20191124103941.png" alt="Music inside" height="200"/>
+
 
 2) Some text prefix which will help you to find all your created albums-channels beetwen others in telegram.
 I'm using "recpl" - recvec playlist
 
 Output:
 
-![Created channel](https://i.ibb.co/C2sQQNQ/Deepin-20191124104720.png )
-![Inside](https://i.ibb.co/fFrjZ0Q/Deepin-20191124114120.png)
+<img src="https://i.ibb.co/C2sQQNQ/Deepin-20191124104720.png" alt="Created channel" />
+<img src="https://i.ibb.co/fFrjZ0Q/Deepin-20191124114120.png" alt="Inside" height="400"/>
+
 
 The number of albums can be more than one.
 (This album was just an example. Donate and help your favourite artists)
@@ -64,5 +66,6 @@ pip install -r <path/to/the/> requirement.txt
     
 4) Start script and enjoy
 
-![process](https://i.ibb.co/Hq8Dvrr/ezgif-com-video-to-gif.gif)
-![process](https://i.ibb.co/X4csPGf/ezgif-com-video-to-gif-1.gif)
+<img src="https://i.ibb.co/Hq8Dvrr/ezgif-com-video-to-gif.gif" alt="process" height="400"/>
+<img src="https://i.ibb.co/X4csPGf/ezgif-com-video-to-gif-1.gif" alt="process"/>
+
