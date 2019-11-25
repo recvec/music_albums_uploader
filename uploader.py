@@ -16,7 +16,7 @@ path = r"/media/recvec/DE3C1FD03C1FA317/The Left Banke"
 
 
 async def channel_init(prefix, folder):
-    channel_name = prefix + " - " + folder.split("/")[-2] + " - " + folder.split("/")[-1]
+    channel_name = prefix + " - " + folder.split(os.sep)[-2] + " - " + folder.split(os.sep)[-1]
     print("channel name: " + channel_name)
     createdPrivateChannel = await client(CreateChannelRequest(channel_name, "", megagroup=False))
     newChannelID = createdPrivateChannel.__dict__["chats"][0].__dict__["id"]
