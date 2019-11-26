@@ -25,15 +25,20 @@ async def channel_init(prefix, folder):
 
 
 async def icon_init(folder, newChannelID):
-    icon = list(Path(folder + "/").glob("*.jpg"))[0]
-    channel_entity = await client.get_entity(newChannelID)
-    upload_file_result = await client.upload_file(file=str(icon))
-    input_chat_uploaded_photo = InputChatUploadedPhoto(upload_file_result)
-    return channel_entity, input_chat_uploaded_photo
+    channel_entity, input_chat_uploaded_photo = None, None
+    try:
+        icon = list(Path(folder + "/").glob("*.jpg"))[0]
+        channel_entity = await client.get_entity(newChannelID)
+        upload_file_result = await client.upload_file(file=str(icon))
+        input_chat_uploaded_photo = InputChatUploadedPhoto(upload_file_result)
+    finally:
+        return channel_entity, input_chat_uploaded_photo
 
 
 async def upload_icon(channel_entity, input_chat_uploaded_photo):
     try:
+        if channel_entity is None or input_chat_uploaded_photo is None:
+            return False
         result = await client(EditPhotoRequest(channel=channel_entity,
                                                photo=input_chat_uploaded_photo))
         print("successfully uploaded icon")
@@ -55,7 +60,7 @@ async def upload_songs(folder, newChannelID):
 
 
 async def main():
-    folders = list(map((lambda x: os.path.join(path, x)), os.listdir(path)))
+    folders = [f.path for f in os.scandir(path) if f.is_dir()]
 
     await client.start()
 
