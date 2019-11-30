@@ -1,3 +1,4 @@
+import pytube
 import os
 import time
 from pathlib import Path
@@ -58,7 +59,15 @@ async def upload_songs(folder, newChannelID):
         await client.send_file(newChannelID, f)
         print("successfully uploaded song")
 
-
+async def download_youtube_video():
+    print("creating YouTube object")
+    yt = YouTube("https://www.youtube.com/watch?v=_39yYvBUSv0")
+    print(" accessing audio streams of YouTube obj.(first one, more available)")
+    stream = await yt.streams.filter(only_audio=True).first()
+    print(" downloading a video would be: stream = yt.streams.first()")
+    await stream.download()
+    print(" downloaded")
+    
 async def main():
     folders = [f.path for f in os.scandir(path) if f.is_dir()]
 
