@@ -1,4 +1,5 @@
-import pytube
+import youtube_dl
+import re
 import os
 import time
 from pathlib import Path
@@ -59,14 +60,26 @@ async def upload_songs(folder, newChannelID):
         await client.send_file(newChannelID, f)
         print("successfully uploaded song")
 
-async def download_youtube_video():
-    print("creating YouTube object")
-    yt = YouTube("https://www.youtube.com/watch?v=_39yYvBUSv0")
-    print(" accessing audio streams of YouTube obj.(first one, more available)")
-    stream = await yt.streams.filter(only_audio=True).first()
-    print(" downloading a video would be: stream = yt.streams.first()")
-    await stream.download()
-    print(" downloaded")
+async def download_youtube_video(url):
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+        'outtmpl': '%(title)s.%(etx)s',
+        'quiet': False
+    }
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])  # Download into the current working d
+        
+def slice_by_timecode(timecode_raw):
+    temp = re.sub("(\s{1}\-\s{1})?(\d{1,2}\:\d{1,2})(\s{1}\-\s{1})?", "", timecode_raw)
+    temp = re.sub("(\d{1,3}\.)", "", temp).split("\n")
+    names_of_songs = [s.strip() for s in temp]   
+    timecodes = re.findall("\d{1,2}\:\d{1,2}", timecode_raw)
     
 async def main():
     folders = [f.path for f in os.scandir(path) if f.is_dir()]
